@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      imagePullSecrets:
+        - name: ecr-secret
+      containers:
+        - name: webapp
+          image: 963990211788.dkr.ecr.us-east-1.amazonaws.com/simple-python-webapp
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
